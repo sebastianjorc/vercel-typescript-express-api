@@ -23,6 +23,7 @@ userRoute.post('/', async (req : Request, res : Response) => {
     .catch((error : MongoError)=>res.json({message:`${error}    ${req.body}`}));
 });//userController.createUser);
 
+
 /*
 userRoute.get('/:id', userController.getUser);
 userRoute.put('/:id', userController.editUser);

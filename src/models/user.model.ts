@@ -8,11 +8,21 @@ export interface IUserInput{
     password    :string;
 }
 
+export interface IUserLoggin{
+  email    :string;
+  password    :string;
+}
+
 export interface UserDocument extends IUserInput, mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: String): Promise<boolean>;//
 }
+
+const userLogginSchema = new mongoose.Schema<IUserLoggin>({
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true }
+});
 
 const userSchema = new mongoose.Schema<IUserInput>(
   {
@@ -50,6 +60,7 @@ userSchema.methods.comparePassword = async function (
 };/**/
 
 const UserModel = mongoose.model<UserDocument>('User', userSchema);
+export const userLogginModel = mongoose.model('UserLoggin', userLogginSchema);
 
 export default UserModel;
 
