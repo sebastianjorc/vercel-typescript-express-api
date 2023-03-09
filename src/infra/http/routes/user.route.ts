@@ -67,6 +67,26 @@ userRoute.patch('/:id/password', (req, res) => {
     }
   });
 });
+userRoute.patch('/:id/interest', (req, res) => {
+  User.findByIdAndUpdate(req.params.id, { $set: { interest: req.body.interest } }, { new: true }, (err, doc) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'No se pudo actualizar el usuario' });
+    } else {
+      res.status(200).json(doc);
+    }
+  });
+});
+userRoute.patch('/:id/palette', (req, res) => {
+  User.findByIdAndUpdate(req.params.id, { $set: { palette: req.body.palette } }, { new: true }, (err, doc) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'No se pudo actualizar el usuario' });
+    } else {
+      res.status(200).json(doc);
+    }
+  });
+});
 
 userRoute.get('/check-email/:email', async (req, res) => {
   const email = req.params.email;
