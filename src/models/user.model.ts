@@ -7,6 +7,8 @@ export interface IUserInput{
     email       :string;
     password    :string;
     level       :number;
+    interest    :string;
+    palette     :string;
 }
 
 export interface IUserLoggin{
@@ -30,7 +32,9 @@ const userSchema = new mongoose.Schema<IUserInput>(
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true},
     password: { type: String, required: true },
-    level: { type: Number, default: 0 }
+    level: { type: Number, required: true, default: 0 },
+    interest: { type: String, required: true, default: "animales" },
+    palette: { type: String, required: true, default: "azul-naranjo" }
   },
   { timestamps: true  }
 );
