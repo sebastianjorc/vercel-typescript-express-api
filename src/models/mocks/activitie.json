@@ -1,0 +1,17 @@
+{
+  "activitie":{
+    "enunciado" : "",
+    "imagen_de_apoyo" : "",
+    "sonido_de_apoyo" : "",
+    "video_de_apoyo" : "",
+    "tipo_de_interaccion" : "",
+    "imagenes_de_respuesta" : "",
+    "sonidos_de_respuesta" : "",
+    "textos_de_respuesta" : "",
+    "respuestas_correctas" : "",
+    "nivel_de_actividad" : "",
+    "nivel_de_bloom" : "",
+    "interes" : "",
+    "objeto" : ""
+  }
+}

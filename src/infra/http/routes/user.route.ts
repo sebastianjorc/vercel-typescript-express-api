@@ -1,6 +1,7 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import { MongoError } from 'mongodb';
 import User from './../../../models/user.model';
+import Advance from './../../../models/advance.model';
 export const userRoute = Router();
 
 userRoute.get('/', async (req : Request, res : Response) => {
@@ -14,13 +15,24 @@ userRoute.get('/', async (req : Request, res : Response) => {
     }
   });
 /**/
-userRoute.post('/', async (req : Request, res : Response) => {
-  const user = await new User(req.body);
-  user
-    .save()
-    .then((data: any) => res.json(data))
-    .catch((error : MongoError)=>res.json({message:`${error}    ${req.body}`}));
+userRoute.post('/', async (req: Request, res: Response, next: NextFunction) => {
+  const user = new User(req.body);
+  try {
+    const savedUser = await user.save();
+
+    const advance = new Advance({
+      user: savedUser._id
+      // establece los valores de los atributos de ADVANCE según sea necesario
+    });
+    await advance.save();
+
+    res.json(savedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al guardar el usuario' });
+  }
 });
+
 
 
 userRoute.patch('/:id/avatar', (req, res) => {

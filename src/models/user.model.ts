@@ -10,7 +10,6 @@ export interface IUserInput{
     interest    :string;
     palette     :string;
 }
-
 export interface IUserLoggin{
   email    :string;
   password :string;
