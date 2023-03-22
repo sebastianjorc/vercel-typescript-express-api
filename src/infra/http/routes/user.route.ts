@@ -19,10 +19,8 @@ userRoute.post('/', async (req: Request, res: Response, next: NextFunction) => {
   const user = new User(req.body);
   try {
     const savedUser = await user.save();
-
     const advance = new Advance({
       user: savedUser._id
-      // establece los valores de los atributos de ADVANCE según sea necesario
     });
     await advance.save();
 

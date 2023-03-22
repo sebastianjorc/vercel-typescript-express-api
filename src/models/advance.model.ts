@@ -1,24 +1,23 @@
-import mongoose from 'mongoose';
+import mongoose, { Date } from 'mongoose';
 export interface IAdvance{
   progressLevel : number [];
   
 }
 export interface IUserAdvanceInput{
   user          : mongoose.Schema.Types.ObjectId;
-  nivel         : Number;
+  nivel         : number;
   conocimiento  : number[];
   grado_bajo    : number[];
   grado_medio   : number[];
   grado_alto    : number[];
   asistencia_a_clases   : number;
+  asistencia_a_clase_semanal  : number;
+  ultima_conexion_semanal_valida : Date;
   respuestas_correctas  : number;
 }
-
 export interface UserAdvanceDocument extends IUserAdvanceInput, mongoose.Document {
   createdAt: Date;  updatedAt: Date;
-  //comparePassword(candidatePassword: string): Promise<boolean>;//
 }
-
 const userAdvanceSchema = new mongoose.Schema<IUserAdvanceInput>(
   {
     user          : {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
@@ -29,9 +28,9 @@ const userAdvanceSchema = new mongoose.Schema<IUserAdvanceInput>(
     grado_alto    : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] },
     asistencia_a_clases   : {type: Number, required: true, default:0 },
     respuestas_correctas  : {type: Number, required: true, default:0 },
-  },
-  { timestamps: true,    
-  }
+    asistencia_a_clase_semanal  : {type: Number, required: true, default:0 },
+    ultima_conexion_semanal_valida : {type: Date, required: true, default: Date }
+  },{ timestamps: true}
 );
 
 const AvanceSchema = new mongoose.Schema({

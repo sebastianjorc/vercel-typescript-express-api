@@ -20,7 +20,6 @@ advanceRoute.post('/', async (req : Request, res : Response) => {
       .then((data: any) => res.json(data))
       .catch((error : MongoError)=>res.json({message:`${error}    ${req.body}`}));
 });
-
 advanceRoute.get('/:id', async (req : Request, res : Response) => {
     try{
       const {id} = req.body;
@@ -35,7 +34,6 @@ advanceRoute.get('/:id', async (req : Request, res : Response) => {
       console.log(`Error en advance.route.ts:  \n   ${error}`);
     }
 });
-
 advanceRoute.patch('/:id/nivel', (req : Request, res : Response) => {
     UserAdvance.findByIdAndUpdate(req.params.id, { $set: { nivel: req.body.nivel } }, { new: true }, (err, doc) => {
       if (err) {
@@ -99,6 +97,26 @@ advanceRoute.patch('/:id/asistencia_a_clases', (req : Request, res : Response) =
 });  
 advanceRoute.patch('/:id/respuestas_correctas', (req : Request, res : Response) => {
     UserAdvance.findByIdAndUpdate(req.params.id, { $set: { respuestas_correctas: req.body.respuestas_correctas } }, { new: true }, (err, doc) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: 'No se pudo actualizar el usuario' });
+      } else {
+        res.status(200).json(doc);
+      }
+    });
+});
+advanceRoute.patch('/:id/asistencia_a_clase_semanal', (req : Request, res : Response) => {
+    UserAdvance.findByIdAndUpdate(req.params.id, { $set: { asistencia_a_clase_semanal: req.body.asistencia_a_clase_semanal } }, { new: true }, (err, doc) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: 'No se pudo actualizar el usuario' });
+      } else {
+        res.status(200).json(doc);
+      }
+    });
+});
+advanceRoute.patch('/:id/ultima_conexion_semanal_valida', (req : Request, res : Response) => {
+    UserAdvance.findByIdAndUpdate(req.params.id, { $set: { ultima_conexion_semanal_valida: req.body.ultima_conexion_semanal_valida } }, { new: true }, (err, doc) => {
       if (err) {
         console.error(err);
         res.status(500).json({ error: 'No se pudo actualizar el usuario' });
