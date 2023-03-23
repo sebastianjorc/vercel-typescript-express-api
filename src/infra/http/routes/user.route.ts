@@ -23,7 +23,7 @@ userRoute.post('/', async (req: Request, res: Response, next: NextFunction) => {
       user: (await savedUser)._id
     });
     await advance.save();
-    res.json(savedUser).json(advance);
+    res.json(advance);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error al guardar el usuario' });
