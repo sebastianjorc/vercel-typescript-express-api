@@ -18,9 +18,9 @@ userRoute.get('/', async (req : Request, res : Response) => {
 userRoute.post('/', async (req: Request, res: Response, next: NextFunction) => {
   const user = new User(req.body);
   try {
-    const savedUser = await user.save();
+    const savedUser =  await user.save();
     const advance = new Advance({
-      user: savedUser._id
+      user: (await savedUser)._id
     });
     await advance.save();
     res.json(savedUser).json(advance);
