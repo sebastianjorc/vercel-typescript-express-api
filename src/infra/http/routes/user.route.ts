@@ -1,5 +1,4 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import { MongoError } from 'mongodb';
 import User from './../../../models/user.model';
 import Advance from './../../../models/advance.model';
 export const userRoute = Router();
@@ -15,7 +14,19 @@ userRoute.get('/', async (req : Request, res : Response) => {
     }
   });
 /**/
-userRoute.post('/', async (req: Request, res: Response, next: NextFunction) => {
+userRoute.post('/', async (req: Request, res: Response) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+
+    const advance = new Advance({ _id: user._id });
+    await advance.save();
+
+    res.status(201).json({ user, advance });
+  } catch (err : any) {
+    res.status(400).json({ error: err.message });
+  }
+  /*  
   const user = new User(req.body);
   try {
     const savedUser =  await user.save();
@@ -28,6 +39,7 @@ userRoute.post('/', async (req: Request, res: Response, next: NextFunction) => {
     console.error(error);
     res.status(500).json({ message: 'Error al guardar el usuario' });
   }
+  */
 });
 
 

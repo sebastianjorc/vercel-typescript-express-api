@@ -1,11 +1,11 @@
 ###
-POST http://vercel-typescript-express-api-fawn.vercel.app/api/users  HTTP/1.1
+POST http://localhost:3000/api/users  HTTP/1.1
 Content-Type: application/json
 
 {
     "avatarPath": "url_path",
     "username":"sebastianjorc",
-    "email": "login@login.co",
+    "email": "log@login.co",
     "password": "password1",
     "passwordConfirmation": "password1"
 }
