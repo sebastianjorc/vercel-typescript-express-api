@@ -10,21 +10,10 @@ export interface IUserInput{
     interest    :string;
     palette     :string;
 }
-export interface IUserLoggin{
-  email    :string;
-  password :string;
-}
-
 export interface UserDocument extends IUserInput, mongoose.Document {
   createdAt: Date;  updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;//
 }
-
-const userLogginSchema = new mongoose.Schema<IUserLoggin>({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
-});
-
 const userSchema = new mongoose.Schema<IUserInput>(
   {
     avatarPath: { type: String, required: true },
@@ -44,6 +33,15 @@ userSchema.pre('save', async function (next) {
     return await next();
   }
   return await next();
+});
+export interface IUserLoggin{
+  email    :string;
+  password :string;
+}
+
+const userLogginSchema = new mongoose.Schema<IUserLoggin>({
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true }
 });
 
 userSchema.methods.comparePassword = async function (

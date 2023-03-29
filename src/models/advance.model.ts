@@ -14,6 +14,7 @@ export interface IUserAdvanceInput{
   asistencia_a_clase_semanal  : number;
   ultima_conexion_semanal_valida : Date;
   respuestas_correctas  : number;
+  cantidad_actividades_realizadas: number;
 }
 export interface UserAdvanceDocument extends IUserAdvanceInput {
   createdAt: Date;  updatedAt: Date; 
@@ -28,6 +29,7 @@ const userAdvanceSchema = new mongoose.Schema<IUserAdvanceInput>(
     asistencia_a_clases   : {type: Number, required: true, default:0 },
     respuestas_correctas  : {type: Number, required: true, default:0 },
     asistencia_a_clase_semanal    : {type: Number, required: true, default:0 },
+    cantidad_actividades_realizadas: {type: Number, required: true, default:0 },
     ultima_conexion_semanal_valida: {type: Date, required: true, default: Date }
   },{ timestamps: true}
 );
