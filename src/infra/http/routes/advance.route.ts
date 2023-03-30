@@ -135,3 +135,13 @@ advanceRoute.patch('/:id/cantidad_actividades_realizadas', (req : Request, res :
       }
     });
 });
+advanceRoute.patch('/:id/ultima_conexion', (req : Request, res : Response) => {
+    UserAdvance.findByIdAndUpdate(req.params.id, { $set: { ultima_conexion: req.body.ultima_conexion } }, { new: true }, (err, doc) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: 'No se pudo actualizar el usuario' });
+      } else {
+        res.status(200).json(doc);
+      }
+    });
+});
