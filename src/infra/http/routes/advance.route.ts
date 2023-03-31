@@ -22,16 +22,16 @@ advanceRoute.post('/', async (req : Request, res : Response) => {
 });
 advanceRoute.get('/:id', async (req : Request, res : Response) => {
     try{
-      const {id} = req.body;
-      const user = await UserAdvance.findOne({ id });
+      const id = req.params.id;
+      const user = await UserAdvance.findOne({ _id: id });
       if (!user) {
         return res.status(400).send({ msg: 'Usuario no existe en la base de datos' });
       }
       res.send({ user });
     }
     catch(error){
-      console.error(`Error en advance.route.ts:  \n   ${error}`);
       console.log(`Error en advance.route.ts:  \n   ${error}`);
+      res.status(500).send({ msg: 'Error interno del servidor' });
     }
 });
 advanceRoute.patch('/:id/nivel', (req : Request, res : Response) => {

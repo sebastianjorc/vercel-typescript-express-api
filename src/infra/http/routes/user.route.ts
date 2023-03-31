@@ -41,9 +41,6 @@ userRoute.post('/', async (req: Request, res: Response) => {
   }
   */
 });
-
-
-
 userRoute.patch('/:id/avatar', (req, res) => {
   User.findByIdAndUpdate(req.params.id, { $set: { avatarPath: req.body.avatarPath } }, { new: true }, (err, doc) => {
     if (err) {
@@ -54,7 +51,6 @@ userRoute.patch('/:id/avatar', (req, res) => {
     }
   });
 });
-
 userRoute.patch('/:id/username', (req, res) => {
   console.log('REQUEST: \n\n\n',req.body);
   User.findByIdAndUpdate(req.params.id, { $set: { username: req.body.username } }, { new: true }, (err, doc) => {
@@ -66,7 +62,6 @@ userRoute.patch('/:id/username', (req, res) => {
     }
   });
 });
-
 userRoute.patch('/:id/email', (req, res) => {
   User.findByIdAndUpdate(req.params.id, { $set: { email: req.body.email } }, { new: true }, (err, doc) => {
     if (err) {
@@ -77,7 +72,6 @@ userRoute.patch('/:id/email', (req, res) => {
     }
   });
 });
-
 userRoute.patch('/:id/password', (req, res) => {
   User.findByIdAndUpdate(req.params.id, { $set: { password: req.body.password } }, { new: true }, (err, doc) => {
     if (err) {
@@ -108,7 +102,6 @@ userRoute.patch('/:id/palette', (req, res) => {
     }
   });
 });
-
 userRoute.get('/check-email/:email', async (req, res) => {
   const email = req.params.email;
   try {
