@@ -145,3 +145,33 @@ advanceRoute.patch('/:id/ultima_conexion', (req : Request, res : Response) => {
       }
     });
 });
+advanceRoute.patch('/:id/numero_transiciones_conocimiento_alto', (req : Request, res : Response) => {
+    UserAdvance.findByIdAndUpdate(req.params.id, { $set: { numero_transiciones_conocimiento_alto: req.body.ultima_conexion } }, { new: true }, (err, doc) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: 'No se pudo actualizar el usuario' });
+      } else {
+        res.status(200).json(doc);
+      }
+    });
+});
+advanceRoute.patch('/:id/numero_transiciones_conocimiento_medio', (req : Request, res : Response) => {
+    UserAdvance.findByIdAndUpdate(req.params.id, { $set: { numero_transiciones_conocimiento_medio: req.body.ultima_conexion } }, { new: true }, (err, doc) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: 'No se pudo actualizar el usuario' });
+      } else {
+        res.status(200).json(doc);
+      }
+    });
+});
+advanceRoute.patch('/:id/numero_transiciones_conocimiento_bajo', (req : Request, res : Response) => {
+    UserAdvance.findByIdAndUpdate(req.params.id, { $set: { numero_transiciones_conocimiento_bajo: req.body.ultima_conexion } }, { new: true }, (err, doc) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: 'No se pudo actualizar el usuario' });
+      } else {
+        res.status(200).json(doc);
+      }
+    });
+});

@@ -16,6 +16,9 @@ export interface IUserAdvanceInput{
   ultima_conexion_semanal_valida : Date;
   respuestas_correctas  : number;
   cantidad_actividades_realizadas: number;
+  numero_transiciones_conocimiento_alto : number[];
+  numero_transiciones_conocimiento_medio: number[];
+  numero_transiciones_conocimiento_bajo: number[];
 }
 export interface UserAdvanceDocument extends IUserAdvanceInput {
   createdAt: Date;  updatedAt: Date; 
@@ -32,7 +35,10 @@ const userAdvanceSchema = new mongoose.Schema<IUserAdvanceInput>(
     respuestas_correctas  : {type: Number, required: true, default:0 },
     asistencia_a_clase_semanal    : {type: Number, required: true, default:0 },
     cantidad_actividades_realizadas: {type: Number, required: true, default:0 },
-    ultima_conexion_semanal_valida: {type: Date, required: true, default: Date }
+    ultima_conexion_semanal_valida: {type: Date, required: true, default: Date },
+    numero_transiciones_conocimiento_alto : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
+    numero_transiciones_conocimiento_medio : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
+    numero_transiciones_conocimiento_bajo : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
   },{ timestamps: true}
 );
 
