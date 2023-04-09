@@ -26,19 +26,19 @@ export interface UserAdvanceDocument extends IUserAdvanceInput {
 const userAdvanceSchema = new mongoose.Schema<IUserAdvanceInput>(
   {
     _id           : {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
-    conocimiento  : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
-    grado_bajo    : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] },
-    grado_medio   : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] },
-    grado_alto    : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] },    
+    conocimiento  : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},//46
+    grado_bajo    : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0] }, // 10
+    grado_medio   : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0] },   // 09
+    grado_alto    : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0] }, // 10
     ultima_conexion: {type: Date, required: true, default: Date },
     asistencia_a_clases   : {type: Number, required: true, default:0 },
     respuestas_correctas  : {type: Number, required: true, default:0 },
     asistencia_a_clase_semanal    : {type: Number, required: true, default:0 },
     cantidad_actividades_realizadas: {type: Number, required: true, default:0 },
     ultima_conexion_semanal_valida: {type: Date, required: true, default: Date },
-    numero_transiciones_conocimiento_alto : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
-    numero_transiciones_conocimiento_medio : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
-    numero_transiciones_conocimiento_bajo : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
+    numero_transiciones_conocimiento_alto : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0]}, //10
+    numero_transiciones_conocimiento_medio : {type: [Number], required: true,  default:[0,0,0,0,0,0,0,0,0]}, //09
+    numero_transiciones_conocimiento_bajo : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0]}, //10
   },{ timestamps: true}
 );
 
