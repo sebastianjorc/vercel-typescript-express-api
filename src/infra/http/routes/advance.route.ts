@@ -56,7 +56,9 @@ advanceRoute.patch('/:id/conocimiento', (req : Request, res : Response) => {
     });
 });  
 advanceRoute.patch('/:id/grado_bajo', (req : Request, res : Response) => {
-    UserAdvance.findByIdAndUpdate(req.params.id, { $set: { grado_bajo: req.body.grado_bajo } }, { new: true }, (err, doc) => {
+    UserAdvance.findByIdAndUpdate(req.params.id, { 
+      $set: { grado_bajo: req.body.grado_bajo } 
+    }, { new: true }, (err, doc) => {
       if (err) {
         console.error(err);
         res.status(500).json({ error: 'No se pudo actualizar el usuario' });
@@ -76,7 +78,10 @@ advanceRoute.patch('/:id/grado_medio', (req : Request, res : Response) => {
     });
 });
 advanceRoute.patch('/:id/grado_alto', (req : Request, res : Response) => {
-    UserAdvance.findByIdAndUpdate(req.params.id, { $set: { grado_alto: req.body.grado_alto } }, { new: true }, (err, doc) => {
+    UserAdvance.findByIdAndUpdate(
+      req.params.id, { 
+        $set: { grado_alto: req.body.grado_alto } 
+      }, { new: true }, (err, doc) => {
       if (err) {
         console.error(err);
         res.status(500).json({ error: 'No se pudo actualizar el usuario' });
@@ -146,7 +151,9 @@ advanceRoute.patch('/:id/ultima_conexion', (req : Request, res : Response) => {
     });
 });
 advanceRoute.patch('/:id/numero_transiciones_conocimiento_alto', (req : Request, res : Response) => {
-    UserAdvance.findByIdAndUpdate(req.params.id, { $set: { numero_transiciones_conocimiento_alto: req.body.numero_transiciones_conocimiento_alto } }, { new: true }, (err, doc) => {
+    UserAdvance.findByIdAndUpdate(req.params.id, { $set: { 
+      numero_transiciones_conocimiento_alto: req.body.numero_transiciones_conocimiento_alto } 
+    }, { new: true }, (err, doc) => {
       if (err) {
         console.error(err);
         res.status(500).json({ error: 'No se pudo actualizar el usuario' });
@@ -169,14 +176,18 @@ advanceRoute.patch('/:id/numero_transiciones_conocimiento_bajo', (req : Request,
     UserAdvance.findByIdAndUpdate(
       req.params.id, { 
         $set: { 
-          numero_transiciones_conocimiento_bajo: req.body.numero_transiciones_conocimiento_bajo 
+          numero_transiciones_conocimiento_bajo: req.body.numero_transiciones_conocimiento_bajo
         } 
-      }, { new: true }, (err, doc) => {
+      }, { new: true })
+      .select('numero_transiciones_conocimiento_bajo')
+      .exec((err, doc) => {
       if (err) {
         console.error(err);
         res.status(500).json({ error: 'No se pudo actualizar el usuario' });
+      } else if (doc){
+        res.status(200).json(doc.numero_transiciones_conocimiento_bajo);
       } else {
-        res.status(200).json(doc);
+        res.status(404).json({ error: 'Usuario no encontrado' });
       }
     });
 });

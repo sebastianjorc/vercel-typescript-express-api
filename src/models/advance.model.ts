@@ -27,7 +27,7 @@ const userAdvanceSchema = new mongoose.Schema<IUserAdvanceInput>(
   {
     _id           : {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
     conocimiento  : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},//46
-    grado_bajo    : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0] }, // 10
+    grado_bajo    : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0] }, // 09
     grado_medio   : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0] },   // 09
     grado_alto    : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0] }, // 10
     ultima_conexion: {type: Date, required: true, default: Date },
@@ -38,7 +38,7 @@ const userAdvanceSchema = new mongoose.Schema<IUserAdvanceInput>(
     ultima_conexion_semanal_valida: {type: Date, required: true, default: Date },
     numero_transiciones_conocimiento_alto : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0]}, //10
     numero_transiciones_conocimiento_medio : {type: [Number], required: true,  default:[0,0,0,0,0,0,0,0,0]}, //09
-    numero_transiciones_conocimiento_bajo : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0,0]}, //10
+    numero_transiciones_conocimiento_bajo : {type: [Number], required: true, default:[0,0,0,0,0,0,0,0,0]}, //09
   },{ timestamps: true}
 );
 
