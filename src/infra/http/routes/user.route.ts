@@ -82,6 +82,16 @@ userRoute.patch('/:id/password', (req, res) => {
     }
   });
 });
+userRoute.patch('/:id/level', (req, res) => {
+  User.findByIdAndUpdate(req.params.id, { $set: { level: req.body.level } }, { new: true }, (err, doc) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'No se pudo actualizar el usuario' });
+    } else {
+      res.status(200).json(doc);
+    }
+  });
+});
 userRoute.patch('/:id/interest', (req, res) => {
   User.findByIdAndUpdate(req.params.id, { $set: { interest: req.body.interest } }, { new: true }, (err, doc) => {
     if (err) {
