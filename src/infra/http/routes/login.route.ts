@@ -8,7 +8,8 @@ export const loginRoute = Router();
 loginRoute.post('/', async (req : Request, res : Response) => {
   try{
     const {email, password} = req.body;
-    const user = await User.findOne({ email });
+    const userEmail = email.toLowerCase();
+    const user = await User.findOne({ userEmail });
     if (!user) {
       return res.status(400).send({ msg: 'Usuario no existe en la base de datos' });
     }

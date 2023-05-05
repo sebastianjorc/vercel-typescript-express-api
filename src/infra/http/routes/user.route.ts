@@ -12,11 +12,14 @@ userRoute.get('/', async (req : Request, res : Response) => {
     catch (err : any) {
       return res.status(500).json({ message: err.message });
     }
-  });
+});
 /**/
 userRoute.post('/', async (req: Request, res: Response) => {
   try {
-    const user = new User(req.body);
+    
+    const { email } = req.body;
+    const userEmail = email.toLowerCase(); // Convertir correo electrónico a minúsculas
+    const user = new User({ ...req.body, email: userEmail });
     await user.save();
 
     const advance = new Advance({ _id: user._id });
@@ -26,20 +29,6 @@ userRoute.post('/', async (req: Request, res: Response) => {
   } catch (err : any) {
     res.status(400).json({ error: err.message });
   }
-  /*  
-  const user = new User(req.body);
-  try {
-    const savedUser =  await user.save();
-    const advance = new Advance({
-      user: (await savedUser)._id
-    });
-    await advance.save();
-    res.json(advance);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error al guardar el usuario' });
-  }
-  */
 });
 userRoute.patch('/:id/avatar', (req, res) => {
   User.findByIdAndUpdate(req.params.id, { $set: { avatarPath: req.body.avatarPath } }, { new: true }, (err, doc) => {
@@ -63,14 +52,15 @@ userRoute.patch('/:id/username', (req, res) => {
   });
 });
 userRoute.patch('/:id/email', (req, res) => {
-  User.findByIdAndUpdate(req.params.id, { $set: { email: req.body.email } }, { new: true }, (err, doc) => {
-    if (err) {
-      console.error(err);
-      res.status(500).json({ error: 'No se pudo actualizar el usuario' });
-    } else {
-      res.status(200).json(doc);
-    }
-  });
+  try {
+    const { email } = req.body;
+    const userEmail = email.toLowerCase(); // Convertir correo electrónico a minúsculas
+    const updatedUser = User.findByIdAndUpdate(req.params.id, { $set: { email: userEmail } }, { new: true });
+    res.status(200).json(updatedUser);
+  } catch (err: any) {
+    console.error(err);
+    res.status(500).json({ error: 'No se pudo actualizar el usuario' });
+  }
 });
 userRoute.patch('/:id/password', (req, res) => {
   User.findByIdAndUpdate(req.params.id, { $set: { password: req.body.password } }, { new: true }, (err, doc) => {
@@ -113,9 +103,10 @@ userRoute.patch('/:id/palette', (req, res) => {
   });
 });
 userRoute.get('/check-email/:email', async (req, res) => {
-  const email = req.params.email;
+  const email = req.params.email;  
+  const userEmail = email.toLowerCase();
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ userEmail });
     if (user) {
       res.status(200).json({ exists: true });
     } else {
