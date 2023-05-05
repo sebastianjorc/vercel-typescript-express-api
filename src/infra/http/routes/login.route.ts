@@ -15,7 +15,9 @@ loginRoute.post('/', async (req : Request, res : Response) => {
     }
     //const isPasswordCorrect = await bcrypt.compare(user.password, password);
     if (password!=user.password){//isPasswordCorrect) {
-      return res.status(400).send({ msg: `Contraseña '${password}' inválida para ${email}:${user.password}` });
+      return res.status(400)
+      .send({ msg: `Contraseña '${password}' inválida para ${userEmail}:${user.password}
+      \n\n ${email} => ${userEmail} == ${user.email}` });
     }
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET || 'secret');
     res.send({ token, user });
