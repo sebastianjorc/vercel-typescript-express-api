@@ -5,7 +5,7 @@ Content-Type: application/json
 {
     "avatarPath": "url_path",
     "username":"sebastianjorc",
-    "email": "LOG@test.com",
+    "email": "S@test.com",
     "password": "password1",
     "passwordConfirmation": "password1"
 }
@@ -21,7 +21,7 @@ POST http://vercel-typescript-express-api-fawn.vercel.app/api/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "LOG@test.com",
+    "email": "S@test.com",
     "password": "password1"
 }
 
