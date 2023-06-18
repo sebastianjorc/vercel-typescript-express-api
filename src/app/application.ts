@@ -15,8 +15,15 @@ import {
   MORGAN_FORMAT,
 } from '../shared/constants/app.constants';
 
+  const allowedOrigins = [
+    'https://stiaal-git-sebastianjorc-sebastianjorc.vercel.app',
+    'https://stiaal.vercel.app',
+    'https://stiaal-sebastianjorc.vercel.app',
+    'http://localhost:3000'
+  ];
 export class Application {
   public express!: express.Application;
+  
 
   public constructor() {
     this.initialize();
@@ -24,7 +31,10 @@ export class Application {
 
   protected initialize(): void {
     this.express = express();
-    this.express.use(cors());
+    // Configuración del middleware cors
+    this.express.use(cors({
+      origin: allowedOrigins.join(','),
+    }));
     this.express.use(helmet());
     this.express.use(compression());
     this.express.use(bodyParser.json({ limit: BODY_PARSER_LIMIT }));
