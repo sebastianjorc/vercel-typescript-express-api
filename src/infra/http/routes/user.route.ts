@@ -91,7 +91,7 @@ userRoute.patch('/password', verificarToken, async (req: Request, res: Response)
     const { id } = req.params;
     const { newPassword  } = req.body; 
     if (!newPassword) {  return res.status(400).json({ error: 'Se requiere un password válido' }); }
-    const saltWorkFactor = parseInt(process.env.SALT_WORK_FACTOR || '', 10); // El segundo argumento es la base numérica (10 para decimal)
+    const saltWorkFactor = parseInt(process.env.SALT_WORK_FACTOR || '3', 10); // El segundo argumento es la base numérica (10 para decimal)
     const salt = await bcrypt.genSalt(saltWorkFactor);
     const newHashedPassword = await bcrypt.hash(newPassword, salt);
     const updatedUser = await User.findByIdAndUpdate( id, { $set: { password: newHashedPassword } }, { new: true } ).exec();
@@ -173,7 +173,7 @@ function verificarToken(req: Request, res: Response, next: NextFunction) {
     return res.status(401).json({ mensaje: 'No se proporcionó un token de autenticación' });
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret1234');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret');
     req.params.id = decoded._id;
     next();
   } catch (error) {

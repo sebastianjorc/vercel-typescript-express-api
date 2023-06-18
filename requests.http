@@ -21,8 +21,8 @@ POST http://vercel-typescript-express-api-fawn.vercel.app/api/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "salt2@test.cl",
-    "password": "seba2521"
+    "email": "salt1@test.cl",
+    "password": "salt1234"
 }
 
 ###
