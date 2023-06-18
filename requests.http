@@ -1,13 +1,13 @@
 ###
-POST http://vercel-typescript-express-api-fawn.vercel.app/api/users  HTTP/1.1
+POST http://localhost:3000/api/users  HTTP/1.1
 Content-Type: application/json
 
 {
     "avatarPath": "url_path",
-    "username":"sebastianjorc",
-    "email": "S@test.com",
-    "password": "password1",
-    "passwordConfirmation": "password1"
+    "username":"user-salt-1",
+    "email": "salt1@test.cl",
+    "password": "salt1234",
+    "passwordConfirmation": "salt1234"
 }
 ###
 POST http://vercel-typescript-express-api-fawn.vercel.app/api/advance  HTTP/1.1
@@ -17,20 +17,21 @@ Content-Type: application/json
     "user": "640953569fa099a60d45e998"
 }
 ###
-POST http://vercel-typescript-express-api-fawn.vercel.app/api/login HTTP/1.1
+POST http://localhost:3000/api/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "S@test.com",
-    "password": "password1"
+    "email": "salt1@test.cl",
+    "password": "salt1234"
 }
 
 ###
-PATCH http://localhost:3000/api/users/640953569fa099a60d45e998/palette HTTP/1.1
+PATCH http://localhost:3000/api/users/avatar HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg0YTVmZTlmY2FjYTdhN2FhNjhjNzQiLCJpYXQiOjE2ODY0NDg0MDJ9.lsgNRyw6EU8plFXoVMpGgWakArs-Q9F7z1-7QXdPqrA
 Content-Type: application/json
 
 {
-    "palette": "rosa-verde"
+  "avatarPath": "ruta/al/avatar.jpg"
 }
 
 ###
@@ -42,9 +43,27 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/api/users HTTP/1.1
+PATCH http://localhost:3000/api/users/password HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg0YTVmZTlmY2FjYTdhN2FhNjhjNzQiLCJpYXQiOjE2ODY0NDg0MDJ9.lsgNRyw6EU8plFXoVMpGgWakArs-Q9F7z1-7QXdPqrA
 Content-Type: application/json
+
+{
+    "newPassword":"test1234"
+}
 
 ###
 GET http://localhost:3000/api/users/check-email/t@test.cl HTTP/1.1
 Content-Type: application/json
+ 
+
+Content-Type: application/json
+
+###
+GET https://dle.rae.es/srv/search?w={hola} HTTP/1.1
+Content-Type: application/json
+
+###
+GET https://dle.rae.es/data/anagram?w=amor HTTP/1.1
+Content-Type: application/json
+ 
+

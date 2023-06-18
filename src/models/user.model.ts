@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+
 
 export interface IUserInput{
     avatarPath  :string;
@@ -26,14 +30,37 @@ const userSchema = new mongoose.Schema<IUserInput>(
   },
   { timestamps: true  }
 );
-
+/*
 userSchema.pre('save', async function (next) {
   const user = this as unknown as UserDocument;
   if (!user.isModified('password')) {
     return await next();
   }
   return await next();
+});*/
+
+userSchema.pre('save', async function (next) {
+  let user = this as UserDocument;
+  if (!user.isModified('password')) {
+    return await next();
+  }
+  
+  console.log("\n\n pre error \n\n");
+  // aquí debajo está el error
+  const saltWorkFactor = parseInt(process.env.SALT_WORK_FACTOR || '', 10); // El segundo argumento es la base numérica (10 para decimal)
+  const salt = await bcrypt.genSalt(saltWorkFactor);
+  // hash and replace password
+  const hash = await bcrypt.hashSync(user.password, salt);
+  console.log(` \nPassword: ${user.password}\n
+                \nSalt: ${salt}\n
+                \nHash: ${hash}\n`
+                );
+  user.password = hash;
+  console.log("\n\npost salt error: "+user.password+"\n\n");
+  return await next();
 });
+
+
 export interface IUserLoggin{
   email    :string;
   password :string;

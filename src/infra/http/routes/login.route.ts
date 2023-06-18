@@ -12,10 +12,12 @@ loginRoute.post('/', async (req : Request, res : Response) => {
     if (!user) {
       return res.status(400).send({ msg: 'Usuario no existe en la base de datos' });
     }
-    if (password != user.password) {
-      return res.status(400).send({ msg: `Contraseña '${password}' inválida para ${email}:${user.password}` });
+    const isPasswordCorrect = await bcrypt.compare(password,user.password);
+    if (!isPasswordCorrect) {
+      return res.status(400).send({ msg: `Contraseña '${password}' ${isPasswordCorrect} para ${email}:${user.password}` });
     }
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET || 'secret');
+    user.password = password;
     res.send({ token, user });
   }
   catch(error){
