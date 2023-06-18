@@ -173,10 +173,10 @@ function verificarToken(req: Request, res: Response, next: NextFunction) {
     return res.status(401).json({ mensaje: 'No se proporcionó un token de autenticación' });
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret1234');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret');
     req.params.id = decoded._id;
     next();
   } catch (error) {
-    return res.status(401).json({ mensaje: 'Token de autenticación inválido' });
+    return res.status(401).json({ mensaje: `Token de autenticación inválido \n ${token}` });
   }
 }

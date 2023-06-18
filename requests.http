@@ -4,10 +4,10 @@ Content-Type: application/json
 
 {
     "avatarPath": "url_path",
-    "username":"user-salt-1",
-    "email": "salt1@test.cl",
-    "password": "salt1234",
-    "passwordConfirmation": "salt1234"
+    "username":"1",
+    "email": "0@test.cl",
+    "password": "test1234",
+    "passwordConfirmation": "test1234"
 }
 ###
 POST http://vercel-typescript-express-api-fawn.vercel.app/api/advance  HTTP/1.1
@@ -21,13 +21,13 @@ POST http://localhost:3000/api/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "salt1@test.cl",
-    "password": "salt1234"
+    "email": "0@test.cl",
+    "password": "test1234"
 }
 
 ###
 PATCH http://localhost:3000/api/users/avatar HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDg0YTVmZTlmY2FjYTdhN2FhNjhjNzQiLCJpYXQiOjE2ODY0NDg0MDJ9.lsgNRyw6EU8plFXoVMpGgWakArs-Q9F7z1-7QXdPqrA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDhmM2ExMDljZjFhNDg0ZmZkZTNmZjgiLCJpYXQiOjE2ODcxMDgxMzJ9.XtCvnNRLAhkTUnGY6v-jp3BbU8gL49UZgDbkrzFX2Qs
 Content-Type: application/json
 
 {

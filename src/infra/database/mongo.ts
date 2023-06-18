@@ -6,7 +6,9 @@ import {
   MONGODB_USER,
 } from '../../shared/constants/database.constants';
 
-const connectionString = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASS}@${MONGODB_HOST}/${MONGODB_DATABASE}`;
+//const connectionString = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASS}@${MONGODB_HOST}/${MONGODB_DATABASE}`;
+const connectionString = `mongodb+srv://admin:admin@stiaalcluster.6h9tltk.mongodb.net/StiaalDB?retryWrites=true&w=majority`;
+
 
 const options: mongoose.ConnectOptions = {
   keepAlive: true,
