@@ -14,13 +14,16 @@ import {
   BODY_PARSER_LIMIT,
   MORGAN_FORMAT,
 } from '../shared/constants/app.constants';
+/*
+const allowedOrigins = [
+  'https://stiaal-git-sebastianjorc-sebastianjorc.vercel.app',
+  'https://vercel.app',
+  'https://stiaal.vercel.app',
+  'https://stiaal-sebastianjorc.vercel.app',
+  'http://190.164.236.68',
+  'http://localhost:3000'
+];*/
 
-  const allowedOrigins = [
-    'https://stiaal-git-sebastianjorc-sebastianjorc.vercel.app',
-    'https://stiaal.vercel.app',
-    'https://stiaal-sebastianjorc.vercel.app',
-    'http://localhost:3000'
-  ];
 export class Application {
   public express!: express.Application;
   
@@ -32,9 +35,8 @@ export class Application {
   protected initialize(): void {
     this.express = express();
     // Configuración del middleware cors
-    this.express.use(cors({
-      origin: allowedOrigins.join(','),
-    }));
+    this.express.use(cors());
+    //{      origin: allowedOrigins.join(','),    }));
     this.express.use(helmet());
     this.express.use(compression());
     this.express.use(bodyParser.json({ limit: BODY_PARSER_LIMIT }));
