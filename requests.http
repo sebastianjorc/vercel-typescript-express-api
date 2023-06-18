@@ -17,12 +17,12 @@ Content-Type: application/json
     "user": "640953569fa099a60d45e998"
 }
 ###
-POST http://localhost:3000/api/login HTTP/1.1
+POST http://vercel-typescript-express-api-fawn.vercel.app/api/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "salt1@test.cl",
-    "password": "salt1234"
+    "email": "salt2@test.cl",
+    "password": "seba2521"
 }
 
 ###
