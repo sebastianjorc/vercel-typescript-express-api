@@ -47,7 +47,7 @@ userSchema.pre('save', async function (next) {
   
   console.log("\n\n pre error \n\n");
   // aquí debajo está el error
-  const saltWorkFactor = parseInt(process.env.SALT_WORK_FACTOR || '', 10); // El segundo argumento es la base numérica (10 para decimal)
+  const saltWorkFactor = parseInt(process.env.SALT_WORK_FACTOR || '3', 10); // El segundo argumento es la base numérica (10 para decimal)
   const salt = await bcrypt.genSalt(saltWorkFactor);
   // hash and replace password
   const hash = await bcrypt.hashSync(user.password, salt);
