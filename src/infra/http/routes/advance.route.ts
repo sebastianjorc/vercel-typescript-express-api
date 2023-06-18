@@ -1,8 +1,12 @@
 import { Router, Request, Response } from 'express';
 import { MongoError } from 'mongodb';
 import UserAdvance from './../../../models/advance.model';
+import { NextFunction } from 'connect';
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 export const advanceRoute = Router();
+const jwt = require('jsonwebtoken');
 
 advanceRoute.get('/', async (req : Request, res : Response) => {
     try {
@@ -191,3 +195,18 @@ advanceRoute.patch('/:id/numero_transiciones_conocimiento_bajo', (req : Request,
       }
     });
 });
+
+
+function verificarToken(req: Request, res: Response, next: NextFunction) {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ mensaje: 'No se proporcionó un token de autenticación' });
+  }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret');
+    req.params.id = decoded._id;
+    next();
+  } catch (error) {
+    return res.status(401).json({ mensaje: 'Token de autenticación inválido' });
+  }
+}
